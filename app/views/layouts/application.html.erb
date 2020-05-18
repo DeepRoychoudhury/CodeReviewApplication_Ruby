@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CRA</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready( function() {
+    $('.notice').delay(5000).fadeOut();  
+  });
+  </script>
+  </head>
+
+  <body>
+<nav class="topnav navbar navbar-expand-sm bg-dark navbar-dark">
+<a class="navbar-brand">CodeReviewApp</a>
+<% if user_signed_in? %>
+<% my_arr = format_menus(current_user.id) %>
+<ul class="navbar-nav">
+<% my_arr.each do |v| %>
+<% if v[1]!="Notes" && v[1]!="Search"%>
+  <li class="nav-item">  <a class="nav-link" href=<%= v[0] %> > <%= v[1] %> </a></li>
+<% end %>
+<% end %>
+<div>
+  <%= form_tag(user_search_index_path(current_user.id),method: :get) do %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag("Search") %>
+  <% end %>
+</div>     
+<li class="nav-item nav-link d-flex flex-row-reverse" style="color:white;"> <%= link_to 'Logout',destroy_user_session_path, method: :delete %></li>
+</ul>
+<% end %>
+</nav>
+    <center>      
+    <%if notice %>
+       <p class="notice"><%= notice %></p>
+       <%end %>
+    <%= yield %>
+  </center>
+
+  </body>
+</html>

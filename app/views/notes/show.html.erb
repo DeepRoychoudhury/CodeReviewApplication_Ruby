@@ -1,0 +1,10 @@
+<% begin %>
+<%= @project.ProjectName %></br>
+
+<%= @note.notepad %></br>
+
+<%= link_to 'Edit', edit_project_note_path(@project.id,@note.id) %>
+<%= link_to 'Back', user_projects_path(current_user.id) %>
+<% rescue %>
+
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ProjectName: MyString
+  Path: MyString
+  Status: MyString
+  user: one
+
+two:
+  ProjectName: MyString
+  Path: MyString
+  Status: MyString
+  user: two

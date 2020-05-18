@@ -1,0 +1,76 @@
+
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		
+		var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+	</script>
+	<style type="text/css">
+		ul.caret {
+	width:400px !important;
+		}
+		ul, {
+  list-style-type: none;
+  width: 200px !important;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+  border-top: none !important;
+  
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="panel-group">
+		<div class="panel panel-success">
+			<div class="panel-heading">	Application Directory Path </div>
+			<div class="panel-body">
+			Project Name -	<%= @project.ProjectName %> <br/>
+			Project Path -	<%= @project.Path %>
+			<br/>
+			<a href=<%= user_projects_path(current_user.id) %> class= "btn btn-success" > Back </a>
+			</div>
+			</div>
+
+
+	</div>
+</div>
+</body>

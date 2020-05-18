@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<%= form_with(model: prj_review, local: true) do |form| %>
+  <% if prj_review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(prj_review.errors.count, "error") %> prohibited this prj_review from being saved:</h2>
+
+      <ul>
+        <% prj_review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-success">
+      <div class="panel-heading">Project Review</div>
+      <div class="panel-body">
+
+  <div class="field">
+    <%= form.label :project_id %>
+
+    <% projectmaster_array = Project.all.map { |project| [project.ProjectName, project.id] } %> 
+    <%= form.select  :project_id, options_for_select(projectmaster_array,selected: prj_review.project_id ) %> 
+  </div>
+
+  <div class="field">
+    <%= form.label :review_id %>
+        <% reviewmaster_array = Review.all.map { |review| [review.ReviewName+"("+review.FileType+")", review.id] } %> 
+    <%= form.select  :review_id, options_for_select(reviewmaster_array,selected: prj_review.review_id) %> 
+  </div>
+
+  <div class="field">
+    <%= form.label :ReviewType %>
+    <%= form.text_field :ReviewType %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ReviewValue %>
+    <%= form.text_field :ReviewValue %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<% end %>

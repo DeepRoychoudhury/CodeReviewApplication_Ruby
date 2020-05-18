@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<%= form_with(model: role_page, local: true) do |form| %>
+  <% if role_page.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(role_page.errors.count, "error") %> prohibited this role_page from being saved:</h2>
+
+      <ul>
+        <% role_page.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-success">
+      <div class="panel-heading">Role Pages</div>
+      <div class="panel-body">
+  <div class="field">
+    <%= form.label :role_master_id %>
+    
+    <% rolemaster_array = RoleMaster.all.map { |role| [role.rolename, role.id] } %> 
+    <%= form.select  :role_master_id, options_for_select(rolemaster_array,selected: role_page.role_master_id ) %> 
+  </div>
+
+  <div class="field">
+    <%= form.label :page_master_id %>
+
+    <% pagemaster_array = PageMaster.all.map { |page| [page.pagename, page.id] } %> 
+    <%= form.select  :page_master_id, options_for_select(pagemaster_array,selected: role_page.page_master_id ) %> 
+
+  
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<% end %>

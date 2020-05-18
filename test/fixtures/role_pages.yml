@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  role_master: one
+  page_master: one
+
+two:
+  role_master: two
+  page_master: two
+
+three:
+  role_master: three
+  page_master: three

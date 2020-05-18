@@ -1,0 +1,125 @@
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <style type="text/css">
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+#ErrorDiv
+{
+   color: #f00;
+  alert {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+ }
+   </style>
+
+</head>
+
+<body>
+
+ <center>
+<%= form_for [@review],class: "container", html: { multipart: true } do |f| %>
+<div class="container">
+    <div class="panel-group">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+<div class="row ">
+   <div class="col-md-4">
+      
+   </div>
+   <div class="col-md-4 form-group " >
+      <%= f.label :Review_Rules , class: "h1"%>
+   </div>
+   <div class="col-md-4">
+      
+   </div>
+</div>
+</div>
+      <div class="panel-body">
+<div class="row">
+   <div class="col-md-3">
+      
+   </div>
+   <div class="col-md-2 form-group text-right" style="margin-top: 0.50%;">
+      <%= f.label :FileType, class: "form-control-plaintext" %>
+   </div>
+   <div class="col-md-2 form-group ">
+   	
+      <%= f.select  :FileType, options_for_select([['Controller','Controller'],['Model','Model'],['View','View'],['Helper','Helper']]) %>
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+      
+   </div>
+   <div class="col-md-2 form-group text-right" style="margin-top: 0.50%;">
+      <%= f.label :ReviewName, class: "form-control-plaintext" %>
+   </div>
+   <div class="col-md-2 form-group ">
+      <%= f.text_field :ReviewName , class: "form-control"%>
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+      
+   </div>
+   <div class="col-md-2 form-group text-right" style="margin-top: 0.50%;">
+      <%= f.label :ReviewValue, class: "form-control-plaintext" %>
+   </div>
+   <div class="col-md-2 form-group ">
+      <%= f.text_field :ReviewValue , class: "form-control"%>
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+      
+   </div>
+   <div class="col-md-1 form-group text-right" >
+      <%= f.submit "Save" , class: "btn btn-primary" %>
+   </div>
+   <div class="col-md-2 form-group ">
+      <a href=<%= reviews_path %>   class= "btn btn-success" > Back </a>
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+</div>
+<div class="row">
+   <div class="col-md-4">
+   </div>
+   <div class="col-md-4" id="ErrorDiv">
+      <% if !@review.errors.empty? %>
+         <% @review.errors.full_messages.each do |msg| %>
+               <div class="alert alert-danger" role="alert">
+                  <%= msg %>
+               </div>
+         <% end %>   
+      <%  end %>
+   </div>
+   <div class="col-md-4">
+   </div>
+</div> 
+</div>
+  <%  end %>
+</center>   
+  </body>
+
+
+   
+      
+  

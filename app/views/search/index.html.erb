@@ -1,0 +1,107 @@
+<h2>Search Result</h2>
+<% begin %>
+<% if !@searches.empty? %>
+<% isearchid="" %>
+
+<% if @searchdone=='note' %>
+<% @searches[0].each do |search| %>	
+<% if search.id!=isearchid %> 
+<%= label_tag 'Found Notes for' %> <%= Project.find(search.project_id).ProjectName %>
+<%= link_to "Find Me Here", project_note_path(search.project_id,search.id) %>
+<% isearchid=search.id %>
+<% end %>
+<% end %>
+<% end %>
+
+<% if @searchdone=='project' %>
+<%= label_tag 'Found Project' %> <%= @searches[0].ProjectName %>
+<%= link_to "Find Me Here", user_project_path(@searches[0].user_id,@searches[0].id) %></br>
+<% end %>
+
+<% if @searchdone=='review' %>
+
+<% @searches.each do |isearch| %>
+<% if isearch[0]!=nil %> 
+<% if (isearch[0].id!=isearchid) %> 
+<%= label_tag 'Found Project Review for ' %> <%= Project.find(isearch[0].project_id).ProjectName %>
+<%= label_tag 'with Review on ' %> <%=  Review.find(isearch[0].review_id).ReviewName %> ( <%=  Review.find(isearch[0].review_id).FileType %>  )
+<%= link_to "Find Me Here", prj_review_path(isearch[0].id) %></br>
+<% isearchid=isearch[0].id %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+
+<% if @searchdone=='result' %>
+
+<% @searches.each do |isearch| %>
+<% if isearch[0]!=nil %> 
+<% if (isearch[0].id!=isearchid) %> 
+<%= label_tag 'Found Result for ' %> <%= Project.find(isearch[0].project_id).ProjectName %>
+<%= label_tag 'with Result on ' %> <%=  Result.find(isearch[0].id).Type_Of_File %> 
+<%= link_to "Find Me Here", user_result_path(current_user.id,isearch[0].id) %></br>
+<% isearchid=isearch[0].id %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+
+<% if @searchdone=='searchdonebysuper' %>
+
+<% @searches.each do |s| %>
+<% @s=s %>
+<% if @s.is_a?Project %>
+<%= label_tag 'Found Project' %> <%= @s.ProjectName %>
+<%= link_to "Find Me Here", user_project_path(@s.user_id,@s.id) %></br>
+<% end %>
+<% end %>
+
+<% @searches.each do |s| %>
+<% @s=s %>
+<% if @s[0]!=nil %>
+<% if @s[0].is_a?Note %>
+<%= label_tag 'Found Notes for' %> <%= Project.find(@s[0].project_id).ProjectName %>
+<%= link_to "Find Me Here", project_note_path(@s[0].project_id,@s[0].id) %></br>
+<% end %>
+<% end %>
+<% end %>
+
+<% @searches.each do |s| %>
+<% @s=s %>
+<% if @s[0]!=nil %>
+<% if @s[0].is_a?ProjectReview %>
+<%= label_tag 'Found Project Review for ' %> <%= Project.find(search.project_id).ProjectName %>
+<%= label_tag 'with Review on ' %> <%=  Review.find(search.review_id).ReviewName %> ( <%=  Review.find(search.review_id).FileType %>  )
+<%= link_to "Find Me Here", prj_review_path(search.id) %></br>
+<% end %>
+<% end %>
+<% end %>
+
+
+<% @results=Result.all.where(:project_id => @searches[0].id) %>
+<% @results.each do |result| %>
+<%= label_tag 'Found Result for' %> <%= @searches[0].ProjectName %>
+<%= label_tag 'with Result on ' %> <%=  Result.find(result.id).Type_Of_File %> 
+<%= link_to "Find Me Here", user_result_path(current_user.id,result.id) %></br>
+<% end %>
+
+<% i='2' %>
+<% @searches.each do %>
+<% if @searches[i.to_i]!=nil %>
+<% @searches[i.to_i].each do |search|%>
+<% if search!=nil %>
+<% if search.review_id!=nil %>
+<%= label_tag 'Found Project Review for ' %> <%= Project.find(search.project_id).ProjectName %>
+<%= label_tag 'with Review on ' %> <%=  Review.find(search.review_id).ReviewName %> ( <%=  Review.find(search.review_id).FileType %>  )
+<%= link_to "Find Me Here", prj_review_path(search.id) %></br>
+<% end %>
+<% end %>
+<% i=i.to_i+1 %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+
+<% end %>
+<% rescue %>
+<% end %>

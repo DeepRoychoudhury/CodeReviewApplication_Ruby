@@ -1,0 +1,63 @@
+
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  
+     <script src=" https://code.jquery.com/jquery-3.3.1.js"></script>
+  
+     <script src=" https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#tblResult').DataTable({
+        "scrollY":        "300px"
+    });
+  });
+</script>   
+</head>
+<br>
+<div class="container" style="text-align: center;">
+<% if !flash[:notice].blank? %>
+   <div>
+      <%= flash[:notice] %>
+   </div>
+<% end %>
+
+
+<%= link_to 'New Project Review', new_prj_review_path, class: "btn btn-info" %><br>
+<br>
+
+
+<table border="3" class="table table-striped" id="tblResult">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"  style="text-align: center;">Project</th>
+      <th scope="col"  style="text-align: center;">Review</th>
+      <th scope="col"  style="text-align: center;">Reviewtype</th>
+      <th scope="col"  style="text-align: center;">Reviewvalue</th>
+      <th scope="col"  style="text-align: center;">Show</th>
+      <th scope="col"  style="text-align: center;">Edit</th>
+      <th scope="col"  style="text-align: center;">Destroy</th>
+    </tr>
+  </thead>
+<% begin %>
+  <tbody>
+    <% @prj_reviews.each do |prj_review| %>
+      <tr>
+        <td><%=  Project.find(prj_review.project_id).ProjectName %> </td>
+        <td><%=  Review.find(prj_review.review_id).ReviewName %> ( <%=  Review.find(prj_review.review_id).FileType %>  )</td>
+        <td><%= prj_review.ReviewType %></td>
+        <td><%= prj_review.ReviewValue %></td>
+        <td><%= link_to 'Show', prj_review_path(prj_review.id) %></td>
+        <td><%= link_to 'Edit', edit_prj_review_path(prj_review.id) %></td>
+        <td><%= link_to 'Delete', prj_review_path(prj_review.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <% rescue %>
+  <h4>No Project Reviews Found</h4>
+  <% end %>
+</table>
+
+<br>
+

@@ -1,0 +1,59 @@
+<html>
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  
+     <script src=" https://code.jquery.com/jquery-3.3.1.js"></script>
+  
+     <script src=" https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#tblResult').DataTable({
+        "scrollY":        "300px"
+    });
+  });
+</script>   
+</head>
+   <body>
+<div class="container" style="text-align: center;">
+<% if !flash[:notice].blank? %>
+   <div>
+      <%= flash[:notice] %>
+   </div>
+<% end %>
+
+<br>
+
+<%= link_to "New Review Rule", new_review_path , class: "btn btn-info"  %>
+<br>
+<br>
+
+<table border="3" class="table table-striped" id ="tblResult" >
+   <thead class="thead-dark">
+      <tr>
+         <th scope="col"  style="text-align: center;">File Type</th>
+         <th scope="col"  style="text-align: center;">Review Name</th>
+         <th scope="col"  style="text-align: center;">Review Value</th>
+         <th scope="col"  style="text-align: center;" >Show</th>
+         <th scope="col"  style="text-align: center;" >Delete</th>
+      </tr>
+   </thead>
+   
+   <tbody>
+      <% @reviews.each do |review| %>
+         
+         <tr>
+            <td><%= review.FileType %></td>
+            <td><%= review.ReviewName %></td>
+            <td><%= review.ReviewValue %></td>
+            <td><%= link_to "Show", review_path(review.id) %></td>
+            <td><%= link_to "Delete",  review_path(review.id), method: :delete, confirm: "Are you sure you want to delete #{review.ReviewName}?" %></td>
+         </tr>
+         
+      <% end %>
+   </tbody>  
+</table>
+</div>
+</body>.
+</html>

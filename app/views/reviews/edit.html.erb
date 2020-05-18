@@ -1,0 +1,103 @@
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <style type="text/css">
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+</style>
+<%= form_for [@review],class: "container", html: { multipart: true } do |f| %>
+<body>
+
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-success">
+      <div class="panel-heading">Review Details</div>
+      <div class="panel-body">
+    <div class="row ">
+   <div class="col-md-4">
+      
+   </div>
+   <div class="col-md-4">
+      
+   </div>
+</div>
+  <div class="row ">
+   <div class="col-md-4">
+      
+   </div>
+   <div class="col-md-4 form-group " >
+      <p id="notice"><%= notice %></p>
+   </div>
+   <div class="col-md-4">
+      
+   </div>
+</div>
+  
+<div class="row">
+   <div class="col-md-3">
+      
+   </div>
+   <div class="col-md-2 form-group text-right" style="margin-top: 0.50%;">
+      <%= f.label :File_Type, class: "form-control-plaintext" %>
+   </div>
+   <div class="col-md-2 form-group ">
+   	<%= f.select  :FileType, options_for_select([['Controller','Controller'],['Model','Model'],['View','View'],['Helper','Helper']],@review.FileType) %>      
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-3">
+      
+   </div>
+   <div class="col-md-2 form-group text-right" style="margin-top: 0.50%;">
+      <%= f.label :Review_Name, class: "form-control-plaintext" %>
+   </div>
+   <div class="col-md-2 form-group ">
+      <%= f.text_field :ReviewName  %>
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-3">
+      
+   </div>
+   <div class="col-md-2 form-group text-right" >
+      <%= f.label :Review_Value, class: "form-control-plaintext" %>
+   </div>
+   <div class="col-md-2 form-group ">
+      <%= f.text_field :ReviewValue%>
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+   <div class="col-md-3">
+      
+   </div>
+   <div class="col-md-2 form-group text-right" >
+<%= f.submit "Save" , class: "btn btn-primary" %>
+
+      
+   </div>
+   <div class="col-md-2 form-group ">
+      <a href=<%= reviews_path %>   class= "btn btn-success" > Back </a>
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+</div>
+
+</body>
+<% end %>
+
+

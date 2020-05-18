@@ -1,0 +1,57 @@
+<head>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src=" https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#tblResult').DataTable({
+        "scrollY":        "300px"
+    });
+  });
+</script> 
+</head> 
+   <body>
+<div class="container" style="text-align: center;">
+  <p id="notice"><%= notice %></p>
+
+<h1>Results</h1>
+
+<%= link_to 'Download Filtered Result', new_result_path , class: "btn btn-info" %><br/><br/>
+
+    <div class="panel-group"  id  = "tblDivResult">
+    <div class="panel panel-success">
+<table id ="tblResult" class="table table-striped table-bordered" >
+  <thead style="background-color: #dff0d8;">
+    <tr>
+      <th scope="col"  style="text-align: center;">Project</th>
+      <th>Folder name</th>
+      <th>Type of file</th>
+      <th>Error description</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+
+<% begin %>
+  <tbody>    
+    <% @results.each do |result| %>
+      <tr>
+        <td><%=  Project.find(result.project_id).ProjectName %> </td>
+        <td><%= result.FileName %></td>
+        <td><%= result.Type_Of_File %></td>    
+        <td><%= result.Error_Description %></td>
+        <td><%= link_to 'Destroy', user_result_path(current_user.id,result.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <% rescue %>
+  <h4>No Results Found</h4>
+  <% end %>
+</table>
+
+
+
+</div>
+</body>

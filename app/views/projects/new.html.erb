@@ -1,0 +1,96 @@
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <style type="text/css">
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+#ErrorDiv
+{
+   color: #f00;
+  alert {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+ }
+   </style>
+
+</head>
+
+<body>
+<% begin %>
+ <center>
+<%= form_for [@user,@project],class: "container", html: { multipart: true } do |f| %>
+
+<div class="row ">
+   <div class="col-md-4">
+      
+   </div>
+   <div class="col-md-4 form-group " >
+      <%= f.label :drop_file_to_upload , class: "h1"%>
+   </div>
+   <div class="col-md-4">
+      
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-3">
+      
+   </div>
+   <div class="col-md-2 form-group text-right" style="margin-top: 0.50%;">
+      <%= f.label :project_name, class: "form-control-plaintext" %>
+   </div>
+   <div class="col-md-2 form-group ">
+      <%= f.text_field :ProjectName , class: "form-control"%>
+   </div>
+   <div class="col-md-5">
+      
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-5">
+      
+   </div>
+   <div class="col-md-3 form-group " style="display: block ruby " >
+      <img src="https://img.icons8.com/nolan/64/upload.png" >
+      <%= f.file_field :Path , class: "upload-input" %>
+   </div>
+   <div class="col-md-4" style="visibility: hidden;">
+      <%= f.text_field :Status , :value => "A", class: "form-control"%>
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-12 form-group">
+      <%= f.submit "Upload file" , class: "btn btn-primary" %>
+      <a href=<%= user_projects_path(current_user.id) %>   class= "btn btn-success" > Back </a>
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-4">
+   </div>
+   <div class="col-md-4" id="ErrorDiv">
+      <% if !@project.errors.empty? %>
+         <% @project.errors.full_messages.each do |msg| %>
+               <div class="alert alert-danger" role="alert">
+                  <%= msg %>
+               </div>
+         <% end %>   
+      <%  end %>
+   </div>
+   <div class="col-md-4">
+   </div>
+</div>
+  <%  end %>
+ </center>   
+ <% rescue %>
+ <h4>No Results Found</h4>
+ <% end %>
+  </body>
+
+
+   
+      
+  

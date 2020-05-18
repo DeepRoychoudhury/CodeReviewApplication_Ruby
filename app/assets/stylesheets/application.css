@@ -1,0 +1,40 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+  
+ $icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
+
+ p.alert {
+ 	color: white;
+ 	background: #828282;
+ }  
+
+ form.new_user {
+ 	color: white;
+ 	background: #828282;
+ }
+
+ nav.navbar  {
+ 	 width: 100%;
+ 	 overflow: hidden;
+ }
+
+ body {
+ 	background-image: url('https://www.allureseo.com/wp-content/uploads/2018/04/professional-images-for-website-background-4.jpg');
+ 	background-repeat: no-repeat;
+ 	background-size: cover;	
+ 	background-attachment: fixed;
+ }

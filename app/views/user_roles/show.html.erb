@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%=  User.find(@user_role.user_id).email %>
+</p>
+
+<p>
+  <strong>Role master:</strong>
+  <%=  RoleMaster.find(@user_role.role_master_id).rolename %>
+</p>
+
+<%= link_to 'Edit', edit_user_role_path(@user_role) %> |
+<%= link_to 'Back', user_roles_path %>

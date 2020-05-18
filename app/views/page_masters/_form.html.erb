@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<%= form_with(model: page_master, local: true) do |form| %>
+  <% if page_master.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(page_master.errors.count, "error") %> prohibited this page_master from being saved:</h2>
+
+      <ul>
+        <% page_master.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-success">
+      <div class="panel-heading">Page Master</div>
+      <div class="panel-body">
+  <div class="field">
+    <%= form.label :pagename %>
+    <%= form.text_field :pagename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pagelink %>
+    <%= form.text_field :pagelink %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<% end %>

@@ -1,0 +1,25 @@
+<br>
+<% begin %>
+<p>
+  <strong>Project:</strong>
+  <%= Project.find(@prj_review.project_id).ProjectName %>
+</p>
+
+<p>
+  <strong>Review:</strong>
+  <%= Review.find(@prj_review.review_id).ReviewName %> ( <%=  Review.find(@prj_review.review_id).FileType %>  )
+</p>
+
+<p>
+  <strong>Reviewtype:</strong>
+  <%= @prj_review.ReviewType %>
+</p>
+
+<p>
+  <strong>Reviewvalue:</strong>
+  <%= @prj_review.ReviewValue %>
+</p>
+<% rescue %>
+<% end %>
+<%= link_to 'Edit', edit_prj_review_path(@prj_review.id) %> |
+<%= link_to 'Back', prj_reviews_path %>

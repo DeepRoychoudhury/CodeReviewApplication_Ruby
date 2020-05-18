@@ -1,0 +1,15 @@
+<%= form_for [@note],class: "container", html: { multipart: true } do |form| %>
+</br>
+
+
+<div>
+<%= form.label :notepad %>
+<%= form.text_area :notepad,  cols: "90", rows: "10" %>
+</div>
+
+ <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+

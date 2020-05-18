@@ -1,0 +1,54 @@
+
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  
+     <script src=" https://code.jquery.com/jquery-3.3.1.js"></script>
+  
+     <script src=" https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#tblResult').DataTable({
+        "scrollY":        "300px"
+    });
+  });
+</script>   
+</head>
+<p id="notice"><%= notice %></p>
+
+<div class="container" style="text-align: center;">
+<% if !flash[:notice].blank? %>
+   <div>
+      <%= flash[:notice] %>
+   </div>
+<% end %>
+<%= link_to 'New Role Master', new_role_master_path, class: "btn btn-info" %><br>
+
+
+</br>
+<table border="3" class="table table-striped" id ="tblResult">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"  style="text-align: center;">Rolename</th>
+      <th scope="col"  style="text-align: center;">Show</th>
+      <th scope="col"  style="text-align: center;">Edit</th>
+      <th scope="col"  style="text-align: center;">Destroy</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @role_masters.each do |role_master| %>
+      <tr>
+        <td><%= role_master.rolename %></td>
+        <td><%= link_to 'Show', role_master %></td>
+        <td><%= link_to 'Edit', edit_role_master_path(role_master) %></td>
+        <td><%= link_to 'Destroy', role_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

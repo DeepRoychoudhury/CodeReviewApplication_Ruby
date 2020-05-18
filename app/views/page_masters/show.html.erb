@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pagename:</strong>
+  <%= @page_master.pagename %>
+</p>
+
+<p>
+  <strong>Pagelink:</strong>
+  <%= @page_master.pagelink %>
+</p>
+
+<%= link_to 'Edit', edit_page_master_path(@page_master) %> |
+<%= link_to 'Back', page_masters_path %>

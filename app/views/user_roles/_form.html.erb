@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<%= form_with(model: user_role, local: true) do |form| %>
+  <% if user_role.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_role.errors.count, "error") %> prohibited this user_role from being saved:</h2>
+
+      <ul>
+        <% user_role.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-success">
+      <div class="panel-heading">User Roles</div>
+      <div class="panel-body">
+  <div class="field">
+    <%= form.label :user_id %>
+  
+        <% usermaster_array = User.all.map { |u| [u.email, u.id] } %> 
+    <%= form.select  :user_id, options_for_select(usermaster_array,selected: user_role.user_id ) %> 
+  </div>
+
+  <div class="field">
+    <%= form.label :role_master_id %>
+    <%= form.collection_radio_buttons :role_master_id, RoleMaster.all, :id, :rolename, include_hidden: false %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<% end %>

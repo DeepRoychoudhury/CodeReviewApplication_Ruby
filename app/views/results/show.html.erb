@@ -1,0 +1,50 @@
+<head> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  function downloadPDF()
+  {
+     var pdf = new jsPDF();
+    source = $('#tblDivResult')[0];
+    margins = {
+      top: 10,
+      bottom: 10,
+      left: 10,
+      width: 1000
+    };
+    pdf.fromHTML(
+        source, 
+        margins.left, 
+        margins.top, {
+        'width': margins.width
+    },
+    function (dispose) {
+        pdf.save('projectResult.pdf');
+    }, margins);
+  }
+
+</script>
+</head>
+<div class= "container">
+<p id="notice"><%= notice %></p>
+    <div class="panel-group"  id  = "tblDivResult">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+      <strong>Project :</strong>
+      <%= @result.Folder_Name %><br/>
+      <strong>Type of file :</strong>
+      <%= @result.Type_Of_File %><br/>
+      <strong>Error Line Number :<strong>
+        <%= @result.Error_Line_Number %><br/>
+        <strong>Error Description :</strong>
+        <%= @result.Error_Description %>
+     </div>      
+      </div>
+    </div>
+  </div>
+</div>
+<button onclick="javascript:downloadPDF();" class="btn btn-primary">PDF Download</button>
+<%= link_to 'Back', resultofproject_path, class: "btn btn-info"  %>
+</div>

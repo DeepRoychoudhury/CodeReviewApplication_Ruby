@@ -1,0 +1,79 @@
+<head> 
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  
+     <script src=" https://code.jquery.com/jquery-3.3.1.js"></script>
+  
+     <script src=" https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+<script type="text/javascript">
+      $(document).ready(function() {
+      $('#tblResult').DataTable({
+        "scrollY":        "300px"
+      });
+    });
+
+ function downloadPDF()
+    {
+        var pdf = new jsPDF('p', 'pt', 'letter');
+      source = $('#tblDivResult')[0];
+      specialElementHandlers = {
+         '#bypassme': function (element, renderer) {
+              return true
+          }
+      };
+      margins = {
+          top: 10,
+          bottom: 10,
+          left: 10,
+          width: 1200
+      };   
+      pdf.fromHTML(
+      source, 
+      margins.left, 
+      margins.top, { 
+          'width': margins.width, 
+          'elementHandlers': specialElementHandlers
+      },
+  
+      function (dispose) {
+          pdf.save('DownloadReport.pdf');
+      }, margins);
+    }
+
+</script>
+</head>
+
+<h1> Result Output</h1>
+<div class= "container">
+    <div class="panel-group"  >
+      <div class="panel panel-success">
+        <div class="panel-heading">
+        <strong>List of Errors<strong>
+       </div>
+        <div class="panel-body" style="text-align: center;" id  = "tblDivResult">
+            <% if @result_data != nil %>
+              <table id ="tblResult" class="table table-striped table-bordered pdf-content pdfViewer"  style="position: relative;width: 100% !important">
+                <thead style="background-color: #dff0d8;"><tr><th>Folder Name</th><th>Type of File</th><th>FileName</th><th>Error Description</th></tr></thead><tbody> 
+                <% @result_data.each do |single_record| %>
+                  <tr>
+                    <td>
+                      <%= single_record.Folder_Name %>  
+                    </td>
+                    <td><%= single_record.Type_Of_File %>  </td>
+                    <td><%= single_record.FileName %>  </td>
+                    <td><%= single_record.Error_Description %>  </td>
+                  </tr>
+                <% end %>
+                 </tbody>
+            </table>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<button onclick="javascript:downloadPDF();" class="btn btn-primary">PDF Download</button>
+<%= link_to 'Back', resultofproject_path, class: "btn btn-info"  %>
+</div>
+
+
